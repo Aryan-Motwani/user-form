@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Users</title>
+    <style>
+        /* Style for the title */
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* Style for the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 8px;
+
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .table-div{
+            margin: 0 10%;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h1>Users</h1>
+    <div style="overflow-x:auto;" class="table-div">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Birth Date</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody"></tbody>
+        </table>
+    </div>
+</body>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+    import { getDatabase,onValue, ref, set,get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyBYRU5MWGIOQ2DEWNSXeohnohQzqrRs3D8",
+        authDomain: "newform-b9ee4.firebaseapp.com",
+        projectId: "newform-b9ee4",
+        storageBucket: "newform-b9ee4.appspot.com",
+        messagingSenderId: "653708027605",
+        appId: "1:653708027605:web:7c1b79681aebd3f8b4a45c"
+      };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  
+    const db = getDatabase(app);
+  let tr;
+    let allUsers = []
+    function getUsers() {
+        const usersRef = ref(db, 'user');
+
+// Listen for changes to the users node
+
+onValue(usersRef, (snapshot) => {
+  const users = snapshot.val();
+  if (users) {
+    // Loop through each user and log their details
+    Object.keys(users).forEach((userId) => {
+      const user = users[userId];
+      tr = document.createElement('tr');
+      tr.innerHTML = `
+      <td>${user.username}</td>
+      <td>${user.num}</td>
+      <td>${user.dob}</td>
+    `;
+      document.querySelector('table').append(tr);
+    });
+  } else {
+    console.log('No users found');
+  }
+}); 
+    }
+
+    setTimeout(() => {
+        getUsers();
+    }, 500);
+</script>
+</html>

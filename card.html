@@ -267,6 +267,9 @@ const checkBlackFillPercentage = () => {
  
   if (blackFillPercentage >= 45) {
     play()
+    setTimeout(() => {
+      window.location = "/index.html"
+    }, 2000);
     scratchCardCoverContainer.classList.add('clear');
     confetti({
       particleCount: 100,
