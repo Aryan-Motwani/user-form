@@ -36,7 +36,15 @@ document
       number: document.getElementById("num").value,
     });
 
-    window.location = "./card.html";
+    console.log("login done");
+    console.log({
+      name: document.getElementById("name").value,
+      dob: document.getElementById("dob").value,
+      number: document.getElementById("num").value,
+    });
+    setTimeout(() => {
+      window.location = "./card.html";
+    }, 500);
 
     //   const usersRef = ref(db, "user");
 
