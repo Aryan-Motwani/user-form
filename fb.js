@@ -26,43 +26,43 @@ const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
 
-document
-  .querySelector(".action-button")
-  .addEventListener("click", function (e) {
-    e.preventDefault();
-    set(ref(db, "user/" + document.getElementById("name").value), {
-      name: document.getElementById("name").value,
-      dob: document.getElementById("dob").value,
-      number: document.getElementById("num").value,
-    });
-
-    console.log("login done");
-    console.log({
-      name: document.getElementById("name").value,
-      dob: document.getElementById("dob").value,
-      number: document.getElementById("num").value,
-    });
-    setTimeout(() => {
-      window.location = "./card.html";
-    }, 500);
-
-    //   const usersRef = ref(db, "user");
-
-    //   // Listen for changes to the users node
-    //   onValue(usersRef, (snapshot) => {
-    //     const users = snapshot.val();
-    //     if (users) {
-    //       // Loop through each user and log their details
-    //       Object.keys(users).forEach((userId) => {
-    //         const user = users[userId];
-    //         console.log(`User ID: ${userId}`);
-    //         console.log(`Username: ${user.username}`);
-    //         console.log(`Email: ${user.email}`);
-    //         console.log(`Phone Number: ${user.phone}`);
-    //         console.log("----------------------");
-    //       });
-    //     } else {
-    //       console.log("No users found");
-    //     }
-    //   });
+document.querySelector("button").addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("hiii");
+  return;
+  set(ref(db, "user/" + document.getElementById("name").value), {
+    name: document.getElementById("name").value,
+    dob: document.getElementById("dob").value,
+    number: document.getElementById("num").value,
   });
+
+  console.log("login done");
+  console.log({
+    name: document.getElementById("name").value,
+    dob: document.getElementById("dob").value,
+    number: document.getElementById("num").value,
+  });
+  setTimeout(() => {
+    window.location = "./card.html";
+  }, 500);
+
+  //   const usersRef = ref(db, "user");
+
+  //   // Listen for changes to the users node
+  //   onValue(usersRef, (snapshot) => {
+  //     const users = snapshot.val();
+  //     if (users) {
+  //       // Loop through each user and log their details
+  //       Object.keys(users).forEach((userId) => {
+  //         const user = users[userId];
+  //         console.log(`User ID: ${userId}`);
+  //         console.log(`Username: ${user.username}`);
+  //         console.log(`Email: ${user.email}`);
+  //         console.log(`Phone Number: ${user.phone}`);
+  //         console.log("----------------------");
+  //       });
+  //     } else {
+  //       console.log("No users found");
+  //     }
+  //   });
+});

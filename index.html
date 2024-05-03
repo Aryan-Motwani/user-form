@@ -30,7 +30,7 @@
           <label class="input-label">Phone Number</label>
         </div>
         <div class="action">
-          <button class="action-button">Submit</button>
+          <button class="action-button" id="submit">Submit</button>
         </div>
       </form>
       <div class="card-info">
@@ -41,5 +41,41 @@
   </div>
   
 </body>
-<script type="module" src="fb.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import { getDatabase, ref, set,get, child } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyBYRU5MWGIOQ2DEWNSXeohnohQzqrRs3D8",
+      authDomain: "newform-b9ee4.firebaseapp.com",
+      projectId: "newform-b9ee4",
+      storageBucket: "newform-b9ee4.appspot.com",
+      messagingSenderId: "653708027605",
+      appId: "1:653708027605:web:7c1b79681aebd3f8b4a45c"
+    };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  const db = getDatabase(app);
+
+  document.getElementById("submit").addEventListener('click', function(e) {
+    e.preventDefault();
+    set(ref(db, 'user/' + document.getElementById("name").value), {
+
+        username: document.getElementById("name").value,
+        dob: document.getElementById("dob").value,
+        num: document.getElementById("num").value
+    });
+
+    setTimeout(() => {
+      window.location = "./card.html"
+    }, 1000);
+    // alert("Login success")
+  })
+</script>
 </html>
